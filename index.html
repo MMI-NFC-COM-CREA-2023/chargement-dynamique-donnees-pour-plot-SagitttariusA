@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Pics/Pingouin-logo.png">
+    
+    <title>My Penguin Page</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <br id="0">
+    <h1>My Penguin Page</h1>
+    
+    <div class="left">
+        <div class="User-area">
+            <div class="User-avtar">
+                <img src="Pics/Pingouin-logo.png"/>
+            </div>
+            <ul class="User-Dropdown U-open">
+                <li><a href="#0">Pingouin</a></li>
+                <li><a href="#1">Graphique 1</a></li>
+                <li><a href="#2">Graphique 2</a></li>
+            </ul>
+        </div>
+
+    </div>
+    
+   
+
+    <!-- Image sous le menu -->
+    <img src="Pics/PingouinOuManchhot.png" alt="Image Penguin ou Manchot" class="menu-image">
+
+    <!-- Première section avec le premier graphique -->
+    <section id="1">
+        <h2>Graphique 1</h2>
+        <div id="graph1" class="graph-container">Graphique 1</div>
+        <br>
+        <p>Description du graphique.</p>
+    </section>
+
+    <!-- Deuxième section avec le deuxième graphique -->
+    <section id="2">
+        <h2 id>Graphique 2</h2>
+        <div id="graph2" class="graph-container">Graphique 2</div>
+        <br>
+        <p>Description du graphique.</p>
+    </section>
+
+    <!-- Inclusion des scripts pour les graphiques -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
+
+
+
+</body>
+</html>
