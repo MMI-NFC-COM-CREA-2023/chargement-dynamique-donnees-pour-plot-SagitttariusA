@@ -54,6 +54,27 @@
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
 
+    <!-- Votre balise <script> pour les données JSON -->
+    <script type="module">
+        // Fonction pour charger les données JSON
+        async function loadData() {
+        try {
+            const response = await fetch('Penguin.json'); // Charge le fichier JSON
+            if (!response.ok) {
+            throw new Error('Network response was not ok');
+            }
+            const data = await response.json(); // Parse le JSON
+            console.log('Données chargées:', data); // Affiche les données dans la console
+        } catch (error) {
+            console.error('Erreur lors du chargement des données:', error);
+        }
+        }
+    
+        // Appel de la fonction pour charger les données
+        loadData();
+    </script>
+    
+
 
 
 </body>
