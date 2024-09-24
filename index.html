@@ -1,81 +1,150 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="Pics/Pingouin-logo.png">
-    
+    <link rel="icon" type="image/png" href="Pics/Pingouin-logo.png" />
+
     <title>My Penguin Page</title>
 
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
-    <br id="0">
+  <body>
+    <br id="0" />
     <h1>My Penguin Page</h1>
-    
-    <div class="left">
-        <div class="User-area">
-            <div class="User-avtar">
-                <img src="Pics/Pingouin-logo.png"/>
-            </div>
-            <ul class="User-Dropdown U-open">
-                <li><a href="#0">Pingouin</a></li>
-                <li><a href="#1">Graphique 1</a></li>
-                <li><a href="#2">Graphique 2</a></li>
-            </ul>
-        </div>
 
+    <div class="left">
+      <div class="User-area">
+        <div class="User-avtar">
+          <img src="Pics/Pingouin-logo.png" />
+        </div>
+        <ul class="User-Dropdown U-open">
+          <li><a href="#0">Pingouin</a></li>
+          <li><a href="#1">Graphique 1</a></li>
+          <li><a href="#2">Graphique 2</a></li>
+        </ul>
+      </div>
     </div>
-    
-   
 
     <!-- Image sous le menu -->
-    <img src="Pics/PingouinOuManchhot.png" alt="Image Penguin ou Manchot" class="menu-image">
+    <img
+      src="Pics/PingouinOuManchhot.png"
+      alt="Image Penguin ou Manchot"
+      class="menu-image"
+    />
 
     <!-- Première section avec le premier graphique -->
     <section id="1">
-        <h2>Graphique 1</h2>
-        <div id="graph1" class="graph-container">Graphique 1</div>
-        <br>
-        <p>Description du graphique.</p>
+      <h2>Graphique 1</h2>
+      <div id="graph1" class="graph-container"></div>
+      <br />
+      <p>
+        Le premier graphique montre la relation entre la longueur du bec
+        (culmen_length_mm) et la profondeur du bec (culmen_depth_mm) chez
+        différentes espèces de manchots. Chaque point représente un manchot, et
+        les différentes couleurs indiquent les espèces. On peut observer que
+        certaines espèces de manchots ont des becs plus longs et plus fins,
+        tandis que d'autres ont des becs plus courts et plus épais. Ces
+        caractéristiques peuvent être liées à leurs habitudes alimentaires et à
+        leur adaptation à leur environnement.
+      </p>
     </section>
 
     <!-- Deuxième section avec le deuxième graphique -->
     <section id="2">
-        <h2 id>Graphique 2</h2>
-        <div id="graph2" class="graph-container">Graphique 2</div>
-        <br>
-        <p>Description du graphique.</p>
+      <h2 id>Graphique 2</h2>
+      <div id="graph2" class="graph-container"></div>
+      <br />
+      <p>
+        Le deuxième graphique illustre la relation entre la longueur des
+        nageoires (flipper_length_mm) et le poids corporel (body_mass_g) des
+        manchots. Il est clair que les manchots ayant de plus longues nageoires
+        ont tendance à peser plus lourd, ce qui est logique car ces manchots ont
+        besoin de nageoires puissantes pour se déplacer efficacement dans l'eau.
+        Les différentes couleurs représentent également les espèces, ce qui nous
+        permet de comparer les caractéristiques morphologiques entre elles.
+      </p>
     </section>
 
     <!-- Inclusion des scripts pour les graphiques -->
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
 
-    <!-- Votre balise <script> pour les données JSON -->
     <script type="module">
-        // Fonction pour charger les données JSON
-        async function loadData() {
-        try {
-            const response = await fetch('Penguin.json'); // Charge le fichier JSON
-            if (!response.ok) {
-            throw new Error('Network response was not ok');
-            }
-            const data = await response.json(); // Parse le JSON
-            console.log('Données chargées:', data); // Affiche les données dans la console
-        } catch (error) {
-            console.error('Erreur lors du chargement des données:', error);
-        }
-        }
-    
-        // Appel de la fonction pour charger les données
-        loadData();
+      // Charger les données JSON
+      import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
+
+      const penguinResponse = await fetch("Penguin.json");
+      const penguin = await penguinResponse.json();
+      console.log(penguin);
+
+      // Premier graphique
+      const plot1 = Plot.dot(penguin, {
+        x: "culmen_length_mm",
+        y: "culmen_depth_mm",
+        stroke: "species",
+      }).plot();
+      document.querySelector("#graph1").append(plot1);
+
+      // Deuxième graphique - Vous pouvez utiliser d'autres données du fichier JSON si disponibles
+      const plot2 = Plot.dot(penguin, {
+        x: "flipper_length_mm",
+        y: "body_mass_g",
+        stroke: "species",
+      }).plot();
+      document.querySelector("#graph2").append(plot2);
     </script>
-    
-
-
-
-</body>
+  </body>
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="col col1">
+      <h2>My Penguin Page</h2>
+      <p>
+        Made with <span style="color: #ba6573">❤</span> by Aliya SUTTY in MMI2
+        Com
+      </p>
+      <div class="social">
+        <a href="https://codepen.io/trending" target="_blank" class="link">
+          <img
+            src="https://assets.codepen.io/9051928/codepen_1.png"
+            alt="CodePen"
+          />
+        </a>
+        <a href="https://twitter.com" target="_blank" class="link">
+          <img src="https://assets.codepen.io/9051928/x.png" alt="Twitter" />
+        </a>
+        <a href="https://youtube.com" target="_blank" class="link">
+          <img
+            src="https://assets.codepen.io/9051928/youtube_1.png"
+            alt="YouTube"
+          />
+        </a>
+      </div>
+      <p style="color: #818181; font-size: smaller">
+        2024 © All Rights Reserved
+      </p>
+    </div>
+    <div class="col col3">
+      <a
+        href="https://friendofthesea.org/fr/projets-de-conservation-et-sensibilisation/sauver-les-pingouins/"
+        target="_blank"
+        >Sauver les pingouins</a
+      >
+      <a
+        href="https://www.jaitoutcompris.com/animaux/le-pingouin-22.php"
+        target="_blank"
+        >Recherche sur les pingouins</a
+      >
+      <a href="https://fr.wikipedia.org/wiki/Pingouin" target="_blank"
+        >Informations sur les espèces de pingouins</a
+      >
+      <a
+        href="https://industrial.sherwin-williams.com/na/ca/fr/coil-extrusion/media-center/case-studies/polk-penguin.html"
+        target="_blank"
+        >Conservation des pingouins</a
+      >
+    </div>
+  </footer>
 </html>
