@@ -72,29 +72,41 @@
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
 
-    <script type="module">
-      // Charger les données JSON
-      import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
+    <script>
+      // Fonction asynchrone pour charger les données et générer les graphiques
+      async function loadPenguinData() {
+        // Charger les données JSON des pingouins
+        const penguinResponse = await fetch("Penguin.json");
+        const penguin = await penguinResponse.json();
+        console.log(penguin); // Afficher les données dans la console
 
-      const penguinResponse = await fetch("Penguin.json");
-      const penguin = await penguinResponse.json();
-      console.log(penguin);
+        // Premier graphique : longueur vs profondeur du bec
+        const plot1 = Plot.plot({
+          marks: [
+            Plot.dot(penguin, {
+              x: "culmen_length_mm",
+              y: "culmen_depth_mm",
+              stroke: "species",
+            }),
+          ],
+        });
+        document.querySelector("#graph1").append(plot1);
 
-      // Premier graphique
-      const plot1 = Plot.dot(penguin, {
-        x: "culmen_length_mm",
-        y: "culmen_depth_mm",
-        stroke: "species",
-      }).plot();
-      document.querySelector("#graph1").append(plot1);
+        // Deuxième graphique : longueur des nageoires vs masse corporelle
+        const plot2 = Plot.plot({
+          marks: [
+            Plot.dot(penguin, {
+              x: "flipper_length_mm",
+              y: "body_mass_g",
+              stroke: "species",
+            }),
+          ],
+        });
+        document.querySelector("#graph2").append(plot2);
+      }
 
-      // Deuxième graphique - Vous pouvez utiliser d'autres données du fichier JSON si disponibles
-      const plot2 = Plot.dot(penguin, {
-        x: "flipper_length_mm",
-        y: "body_mass_g",
-        stroke: "species",
-      }).plot();
-      document.querySelector("#graph2").append(plot2);
+      // Appeler la fonction pour charger les graphiques
+      loadPenguinData();
     </script>
   </body>
   <!-- Footer -->
